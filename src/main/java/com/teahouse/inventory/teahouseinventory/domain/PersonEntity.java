@@ -1,6 +1,7 @@
 package com.teahouse.inventory.teahouseinventory.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -35,6 +36,10 @@ public class PersonEntity extends BaseEntity{
 
     @Column(name = "mobile")
     private Long[] mobileNumbers;
+
+
+    @Column(name="email")
+    private String email;
     
     @Column(name = "addresses")
     @JoinTable(name="person_address",
@@ -42,4 +47,10 @@ public class PersonEntity extends BaseEntity{
     inverseJoinColumns = @JoinColumn(name="address_id"))
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AddressEntity> adresses = new ArrayList<>();
+
+    @Column(name="dob")
+    private Date dateOfBirth;
+
+    @Column(name="addressindex")
+    private Short primaryAddressIndex=0;
 }

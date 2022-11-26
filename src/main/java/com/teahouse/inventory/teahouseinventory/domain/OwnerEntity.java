@@ -1,12 +1,15 @@
 package com.teahouse.inventory.teahouseinventory.domain;
 
+import javax.management.relation.Role;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.OwnerType;
+import com.teahouse.inventory.teahouseinventory.domain.enums.Roles;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,20 +22,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name="owner")
 @Entity
-public class OwnerEntity extends PersonEntity {
+public class OwnerEntity extends EmployeeEntity {
     
-    @Column(name="pan_number",nullable = false)
-    private String PANNumber;
-    @Column(name="email",nullable = false)
-    private String email;
+ 
     @Column(name="share",nullable = false)
     private Short percentageOfShare;
+ 
 
-    @Column(name="status",nullable = false)
-    private Boolean isCurrent;
-
-
-    @Column(name="owner_type",nullable = false)
+    @Column(name="owner_role",nullable = false)
     @Enumerated(value=EnumType.STRING)
-    private OwnerType ownerType;
+    private Roles roles=Roles.ADMIN;
+
+
 }
