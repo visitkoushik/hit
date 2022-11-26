@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.DiscountFormat;
@@ -36,7 +37,7 @@ public class BillingEntity extends BaseEntity{
     
 
     @Column(name="billing_item")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name="item_billing",
     joinColumns = @JoinColumn(name="billing_id"),
     inverseJoinColumns =  @JoinColumn(name = "item_id"))
@@ -49,5 +50,7 @@ public class BillingEntity extends BaseEntity{
     @Column(name = "discount_amount")
     private BigDecimal discountAmount;
 
+    @ManyToOne
+    private Franchises franchises;
     
 }

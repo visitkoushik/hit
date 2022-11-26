@@ -33,7 +33,7 @@ public class ItemEntity extends BaseEntity
     private String itemName;
     @Column(name="description")
     private String description;
-    @Column(name="status")
+    @Column(name="status",nullable = false)
     private Boolean isAvailable;
 
     @Column(name="category")
