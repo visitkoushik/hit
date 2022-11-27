@@ -7,6 +7,6 @@ import com.teahouse.inventory.teahouseinventory.domain.Owner;
 public interface OwnerService extends BaseService<Owner,String>{
 
     List<Owner> findAllSuperOwner();
-    List<Owner> findAllFranchiseOwner(); 
+    List<Owner> findAllOwner(); 
     List<Owner> findAllExOwner();
 }

@@ -13,19 +13,20 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Entity
-@Table(name="user_login")
+@Entity(name="userLogin")
+@Table(name="user_login" ,  uniqueConstraints={@UniqueConstraint(columnNames ={"user_name"})})
 public class UserLogin extends BaseEntity{
     
-    @Column(name="userName")
+    @Column(name="user_name")
     private String userName;
-    @Column(name="pass")
+    @Column(name="pass_word")
     private String passWord;
 
     @Column(name="oldpasswords")

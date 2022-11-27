@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name="employee")
 @Table(name="employee")
 public class Employee extends BaseEmployee{
     @Column(name="emp_role",nullable = false)

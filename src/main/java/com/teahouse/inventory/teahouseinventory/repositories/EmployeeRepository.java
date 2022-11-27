@@ -1,0 +1,27 @@
+package com.teahouse.inventory.teahouseinventory.repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.teahouse.inventory.teahouseinventory.domain.Employee;
+
+
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee,String>{
+    
+    @Query("SELECT e FROM employee e WHERE e.isCurrent=false")
+    List<Employee> findAllExEmployee();
+
+    @Query("SELECT e FROM employee e WHERE e.isCurrent=false")
+    List<Employee> findAllEmployee();
+
+    @Query("SELECT e FROM employee e WHERE e.firstName=:firstName AND e.lastName=:lastName")
+    List<Employee> findAllByName(String lastName,String firstName);
+
+    @Query("SELECT e FROM employee e WHERE e.franchises=:ID")
+    List<Employee> findAllEmployeeByFranchiseID(String ID);
+
+}

@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="owner")
-@Entity
+@Entity(name="owner")
 public class Owner extends BaseEmployee {
     
  
