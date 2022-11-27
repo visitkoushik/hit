@@ -28,15 +28,16 @@ public class Franchises extends BaseEntity{
     
     private String name;
     @Column(name="address",nullable = false)
-    private AddressEntity address;
+    private Address address;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name="franchise_owner",
     joinColumns = @JoinColumn(name="franchise_id"),
     inverseJoinColumns = @JoinColumn(name="owner_id"))
     @Column(name="owners",nullable = false)
-    private List<OwnerEntity> owners = new ArrayList<>();
-    @Column(name="tan")
+    private List<Owner> owners = new ArrayList<>();
+
+    @Column(name="tan_number")
     private String tanNumder;
 
 

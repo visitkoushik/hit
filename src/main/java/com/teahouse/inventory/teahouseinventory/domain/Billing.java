@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="billing")
-public class BillingEntity extends BaseEntity{
+public class Billing extends BaseEntity{
 
     @Column(name="date")
     private Date billingDate;
@@ -41,7 +41,7 @@ public class BillingEntity extends BaseEntity{
     @JoinTable(name="item_billing",
     joinColumns = @JoinColumn(name="billing_id"),
     inverseJoinColumns =  @JoinColumn(name = "item_id"))
-    private List<BillingItemEntity> itemEntites = new ArrayList<>();
+    private List<BillingItem> itemEntites = new ArrayList<>();
 
     @Column(name="discount_mode")
     @Enumerated(value=EnumType.STRING)

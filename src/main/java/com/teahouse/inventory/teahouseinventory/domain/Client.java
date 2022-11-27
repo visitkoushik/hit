@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ClientEntity extends PersonEntity {
+public class Client extends PersonEntity {
     
     @Column(name="client_role",nullable = false)
     @Enumerated(value=EnumType.STRING)

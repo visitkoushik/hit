@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "billing_item")
-public class BillingItemEntity extends ItemEntity {
+public class BillingItem extends Item {
  
 
     @Column(name="purchase_amount")

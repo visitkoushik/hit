@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="items")
-public class ItemEntity extends BaseEntity
+public class Item extends BaseEntity
 {
 
     @Column(name="item_name")
@@ -41,9 +41,9 @@ public class ItemEntity extends BaseEntity
     @JoinTable(name="item_category",
     joinColumns = @JoinColumn(name="item_id"),
     inverseJoinColumns =  @JoinColumn(name = "category_id"))
-    private List<CategoryEntity> categories= new ArrayList<>();
+    private List<Category> categories= new ArrayList<>();
 
  
-    @OneToOne(cascade = CascadeType.ALL)
-     private ItemPricingEntity itemPricingEntity;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "itemEntity")
+     private ItemPricing itemPricingEntity;
 }

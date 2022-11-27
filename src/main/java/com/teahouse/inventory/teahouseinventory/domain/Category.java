@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "category")
-public class CategoryEntity extends BaseEntity{
+public class Category extends BaseEntity{
     
     private String categoryName;
 }

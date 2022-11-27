@@ -2,11 +2,15 @@ package com.teahouse.inventory.teahouseinventory.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.Roles;
 
@@ -20,30 +24,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class EmployeeEntity extends PersonEntity{
+@Table(name="employee")
+public class Employee extends BaseEmployee{
     @Column(name="emp_role",nullable = false)
     @Enumerated(value=EnumType.STRING)
     private Roles roles = Roles.EMP;
 
-    @Column(name="status",nullable = false)
-    private Boolean isCurrent;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "franchise_id", referencedColumnName = "id")
+    private Franchises franchises;
 
-    @Column(name="pan_number" )
-    private String PANNumber;
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "employee")
+    private UserLogin userLogin; 
 
-    @OneToOne
-    private UserLogin loginInfo;
-
-
-
-    @Column(name="dob" ,nullable = false)
-    private Date dateOfBirth;
-
-
-
-    @Column(name="doj",nullable = false)
-    private Date dateOfJoin;
-
-    @Column(name="doe", nullable = false)
-    private Date dateOfExit;
 }

@@ -46,7 +46,7 @@ public class PersonEntity extends BaseEntity{
     joinColumns = @JoinColumn(name="person_id"),
     inverseJoinColumns = @JoinColumn(name="address_id"))
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<AddressEntity> adresses = new ArrayList<>();
+    private List<Address> adresses = new ArrayList<>();
 
     @Column(name="dob")
     private Date dateOfBirth;
