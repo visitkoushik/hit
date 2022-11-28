@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.DiscountFormat;
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name="billings")
 @Table(name="billing")
 public class Billing extends BaseEntity{
 
@@ -52,5 +53,7 @@ public class Billing extends BaseEntity{
 
     @ManyToOne
     private Franchises franchises;
-    
+
+    @ManyToOne
+    private Employee employee;    
 }

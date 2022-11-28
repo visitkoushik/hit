@@ -26,6 +26,7 @@ public class UserLogin extends BaseEntity{
     
     @Column(name="user_name")
     private String userName;
+     
     @Column(name="pass_word")
     private String passWord;
 

@@ -36,7 +36,7 @@ public class Item extends BaseEntity
     @Column(name="status",nullable = false)
     private Boolean isAvailable;
 
-    @Column(name="category")
+    @Column(name="category",nullable = false)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="item_category",
     joinColumns = @JoinColumn(name="item_id"),
