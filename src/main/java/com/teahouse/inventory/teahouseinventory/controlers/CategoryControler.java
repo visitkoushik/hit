@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.teahouse.inventory.teahouseinventory.domain.Category;
 import com.teahouse.inventory.teahouseinventory.services.CategoryService;
-
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -23,18 +22,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("api/category/{loginKeyid}")
 public class CategoryControler  extends BaseControler{
 
-
+    
     private final CategoryService categoryService;
 
     public CategoryControler(CategoryService categoryService) {
-        super();
+        super(); 
         this.categoryService = categoryService;
     }
 
 
+
     @PostMapping 
-    public ResponseEntity<Category>  add(@RequestBody Category category){
-        
+    public ResponseEntity  add(
+    @PathVariable("loginKeyid")  String loginKey,  
+    @RequestBody Category category){
+        if(getUserLoginId(loginKey)==null){
+            return   new ResponseEntity<String>
+            ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
+        }
         return new ResponseEntity<Category>(this.categoryService.save(category), 
         HttpStatus.CREATED);
         
@@ -42,16 +47,31 @@ public class CategoryControler  extends BaseControler{
 
 
     @PutMapping("{id}")
-    public ResponseEntity<Category> update(@PathVariable("id") Long id, @RequestBody Category category){
+    public ResponseEntity update(  
+        @PathVariable("loginKeyid")  String loginKey,  
+        @PathVariable("id") Long id, 
+        @RequestBody Category category){
+       
+            if(getUserLoginId(loginKey)==null){
+                return   new ResponseEntity<String>
+                ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
+            }
         return new ResponseEntity<Category>(this.categoryService.update(category,id), 
         HttpStatus.ACCEPTED);
     }
 
 
     @GetMapping("all")
-    public ResponseEntity<List<Category>> findAll(
+    public ResponseEntity findAll(
+        @PathVariable("loginKeyid")  String loginKey,  
         @RequestParam(name="active",required = false) @Nullable Boolean active
         ) {
+            if(getUserLoginId(loginKey)==null){
+                if(getUserLoginId(loginKey)==null){
+                    return   new ResponseEntity<String>
+                    ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
+                }
+            }
             if(active==null){
                 return   new ResponseEntity<List<Category>> 
                 (this.categoryService.findAll(), HttpStatus.OK);
@@ -61,9 +81,16 @@ public class CategoryControler  extends BaseControler{
             }
     }
     @GetMapping()
-    public ResponseEntity<Category> findById(
+    public ResponseEntity findById(
+        @PathVariable("loginKeyid")  String loginKey,  
         @RequestParam(name="id",required = true) Long categoryId
         ) {
+
+            if(getUserLoginId(loginKey)==null){
+                return   new ResponseEntity<String>
+                ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
+            }
+
         return   new ResponseEntity<Category> 
         (this.categoryService.findById(categoryId), HttpStatus.OK);
     }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.teahouse.inventory.teahouseinventory.domain.LoggedInUser;
 import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
 import com.teahouse.inventory.teahouseinventory.domain.enums.UserType;
+import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LogOut;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LoginBody;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LoginResp;
 import com.teahouse.inventory.teahouseinventory.services.LoggedInUserService;
@@ -29,6 +30,19 @@ public class LoginUserControler {
         this.userLoginService = userLoginService;
     }
 
+
+    @PostMapping("logout")
+    public ResponseEntity<String>  logout(@RequestBody LogOut login){
+          LoggedInUser loggedId =  this.loggedInUserService.findByAuthKey(login.getAuthCode());
+          if(loggedId!=null){
+            loggedId.setLoggedin(false);
+            this.loggedInUserService.update(loggedId, loggedId.getId());
+            return new ResponseEntity<String>("Logged out successfully",   HttpStatus.OK);
+          }
+          
+          return new ResponseEntity<String>("Something went wrong. ",   HttpStatus.OK);
+    }
+
     @PostMapping("login")
     public ResponseEntity<LoginResp>  login(@RequestBody LoginBody login){
         
@@ -39,15 +53,23 @@ public class LoginUserControler {
         if(userLogin!=null){
             LoggedInUser loggedInUser = this.loggedInUserService
             .findById(userLogin.getLoggedinuser().getId());
-           
+         
             if(loggedInUser!=null){
-                loggedInUser.setLoggedin(true);
-                LoggedInUser l = this.loggedInUserService.update(loggedInUser, loggedInUser.getId());
-                
-                lres.setAuthCode(l.getAuthKey());
-                lres.setError(null);
-                return new ResponseEntity<LoginResp>(lres,   HttpStatus.ACCEPTED);
-               
+                if(loggedInUser.isLoggedin())
+                {
+                    lres.setAuthCode(loggedInUser.getAuthKey());
+                    lres.setError(null);
+                    return new ResponseEntity<LoginResp>(lres,   HttpStatus.ACCEPTED);
+    
+                }
+                else{
+                    loggedInUser.setLoggedin(true);
+                    LoggedInUser l = this.loggedInUserService.update(loggedInUser, loggedInUser.getId());
+                    
+                    lres.setAuthCode(l.getAuthKey());
+                    lres.setError(null);
+                    return new ResponseEntity<LoginResp>(lres,   HttpStatus.ACCEPTED);
+               }
             }
              
         }

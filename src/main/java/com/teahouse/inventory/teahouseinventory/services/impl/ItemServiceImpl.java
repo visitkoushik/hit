@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemEntityService{
 
     @Override
     public List<Item> findAll() {
-        // TODO Auto-generated method stub
+        
         return this.itemRpository.findAll();
     }
 

@@ -1,13 +1,10 @@
 package com.teahouse.inventory.teahouseinventory.services.impl;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.List; 
 
 import org.springframework.stereotype.Service;
-
-import com.teahouse.inventory.teahouseinventory.domain.LoggedInUser;
-import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
-import com.teahouse.inventory.teahouseinventory.repositories.LoggedInUserRepository;
+ 
+import com.teahouse.inventory.teahouseinventory.domain.UserLogin; 
 import com.teahouse.inventory.teahouseinventory.repositories.UserLoginRepository;
 import com.teahouse.inventory.teahouseinventory.services.LoggedInUserService;
 import com.teahouse.inventory.teahouseinventory.services.UserLoginService;
@@ -79,13 +76,5 @@ public class UserLoginServiceImpl implements UserLoginService {
 
 
 
-    private Long getUserLoginId(String loginKey){
-            LoggedInUser logged=  this.loggedInUserService.findByAuthKey(loginKey);
-            if(logged==null){
-                return 0L;
-            }
-
-            return logged.getUserlogin().getId();
-    }
     
 }
