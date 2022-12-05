@@ -15,14 +15,12 @@ public class UserLoginServiceImpl implements UserLoginService {
 
 
 
-    private final UserLoginRepository userLoginRepository;
-    private final LoggedInUserService loggedInUserService;
+    private final UserLoginRepository userLoginRepository; 
 
     public UserLoginServiceImpl(UserLoginRepository userLoginRepository,
     LoggedInUserService loggedInUserService) {
                 super();
         this.userLoginRepository = userLoginRepository;
-        this.loggedInUserService = loggedInUserService;
     }
 
     

@@ -1,10 +1,5 @@
 package com.teahouse.inventory.teahouseinventory.controlers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.teahouse.inventory.teahouseinventory.domain.Category;
-import com.teahouse.inventory.teahouseinventory.services.CategoryService;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -15,50 +10,52 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.RestController;
+ 
+import com.teahouse.inventory.teahouseinventory.domain.Item; 
+import com.teahouse.inventory.teahouseinventory.services.ItemEntityService;
 
 @RestController
-@RequestMapping("api/category/{loginKeyid}")
-public class CategoryControler  extends BaseControler{
-
+@RequestMapping("api/item/{loginKeyid}")
+public class ItemControler extends BaseControler{
     
-    private final CategoryService categoryService;
 
-    public CategoryControler(CategoryService categoryService) {
-        super(); 
-        this.categoryService = categoryService;
+    private final ItemEntityService itemService;
+
+    public ItemControler(ItemEntityService itemService) {
+        this.itemService = itemService;
     }
-
-
 
     @PostMapping("add") 
     public ResponseEntity add(
     @PathVariable("loginKeyid")  String loginKey,  
-    @RequestBody Category category){
+    @RequestBody Item item){
         if(getUserLoginId(loginKey)==null){
             return   new ResponseEntity<String>
             ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<Category>(this.categoryService.save(category), 
+        return new ResponseEntity<Item>(this.itemService.save(item), 
         HttpStatus.CREATED);
         
     }
-
 
     @PutMapping("edit/{id}")
     public ResponseEntity update(  
         @PathVariable("loginKeyid")  String loginKey,  
         @PathVariable("id") Long id, 
-        @RequestBody Category category){
+        @RequestBody Item item){
        
             if(getUserLoginId(loginKey)==null){
                 return   new ResponseEntity<String>
                 ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
             }
-        return new ResponseEntity<Category>(this.categoryService.update(category,id), 
+        return new ResponseEntity<Item>(this.itemService.update(item,id), 
         HttpStatus.ACCEPTED);
     }
+
+
 
 
     @GetMapping("list/all")
@@ -73,17 +70,17 @@ public class CategoryControler  extends BaseControler{
                 }
             }
             if(active==null){
-                return   new ResponseEntity<List<Category>> 
-                (this.categoryService.findAll(), HttpStatus.OK);
+                return   new ResponseEntity<List<Item>> 
+                (this.itemService.findAll(), HttpStatus.OK);
             }else{
-                return   new ResponseEntity<List<Category>> 
-                (this.categoryService.findByStatus(active), HttpStatus.OK);
+                return   new ResponseEntity<List<Item>> 
+                (this.itemService.findByStatus(active), HttpStatus.OK);
             }
     }
     @GetMapping("list")
     public ResponseEntity findById(
         @PathVariable("loginKeyid")  String loginKey,  
-        @RequestParam(name="id",required = true) Long categoryId
+        @RequestParam(name="id",required = true) Long itemId
         ) {
 
             if(getUserLoginId(loginKey)==null){
@@ -91,11 +88,10 @@ public class CategoryControler  extends BaseControler{
                 ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
             }
 
-        return   new ResponseEntity<Category> 
-        (this.categoryService.findById(categoryId), HttpStatus.OK);
+        return   new ResponseEntity<Item> 
+        (this.itemService.findById(itemId), HttpStatus.OK);
     }
 
 
  
-    
 }

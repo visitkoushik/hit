@@ -1,6 +1,6 @@
 package com.teahouse.inventory.teahouseinventory.controlers;
 
-public class UserControler {
+public class UserLoginControler {
     
     
 }
