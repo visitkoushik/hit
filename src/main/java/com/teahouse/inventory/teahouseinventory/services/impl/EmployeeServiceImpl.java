@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.teahouse.inventory.teahouseinventory.domain.Employee;
+import com.teahouse.inventory.teahouseinventory.exceptions.ResourceNotFoundException;
 import com.teahouse.inventory.teahouseinventory.repositories.EmployeeRepository;
 import com.teahouse.inventory.teahouseinventory.services.EmployeeService;
 
@@ -26,9 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findById(String Id) {
+    public Employee findById(Long Id) {
         
-        return this.employeeRepository.findById(Id).orElse(null);
+        return this.employeeRepository.findById(Id).orElseThrow(
+            ()-> new ResourceNotFoundException("Employeee", "ID", Id));
+
     }
 
     @Override
@@ -37,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteById(String Id) {
+    public void deleteById(Long Id) {
         // TODO Auto-generated method stub
         
     }
@@ -54,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllEmployeeByFranchiseID(String ID) {
+    public List<Employee> findAllEmployeeByFranchiseID(Long ID) {
         
         return this.employeeRepository.findAllEmployeeByFranchiseID(ID);
     }
@@ -63,6 +66,30 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findAllEmployee() {
         
         return this.employeeRepository.findAllEmployee();
+    }
+
+
+    @Override
+    public Employee update(Employee t, Long id) {
+        Employee emp = this.employeeRepository.findById(id).orElseThrow(
+            ()-> new ResourceNotFoundException("Employeee", "ID", t.getId()));
+
+            emp.setAdresses(emp.getAdresses()); 
+            emp.setEmail(t.getEmail());   
+            emp.setFirstName(t.getFirstName());   
+            emp.setGender(t.getGender());   
+            emp.setLastName(t.getLastName());   
+            emp.setMiddleName(t.getMiddleName());   
+            emp.setMobileNumbers(t.getMobileNumbers());   
+            emp.setRoles(t.getRoles());   
+            emp.setPrimaryAddressIndex(t.getPrimaryAddressIndex());   
+            emp.setDateOfExit(t.getDateOfExit());
+            emp.setDateOfJoin(t.getDateOfJoin()); 
+            emp.setFranchises(t.getFranchises());
+            emp.setIsCurrent(t.getIsCurrent());
+            emp.setDateOfBirth(t.getDateOfBirth());
+            emp.setPANNumber(t.getPANNumber());
+        return this.employeeRepository.save(emp);
     }
     
 }

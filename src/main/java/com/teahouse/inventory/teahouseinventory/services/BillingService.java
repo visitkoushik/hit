@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.teahouse.inventory.teahouseinventory.domain.Billing;
 
-public interface BillingService extends BaseService<Billing,String>{
+public interface BillingService extends BaseService<Billing,Long>{
     
     List<Billing> findByDateRange(Date startDate,Date endDate);
-    List<Billing> findByEmployee(String empID);
+    List<Billing> findByEmployee(Long empID);
     
 }

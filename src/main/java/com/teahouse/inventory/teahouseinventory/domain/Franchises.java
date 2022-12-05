@@ -33,9 +33,9 @@ public class Franchises extends BaseEntity{
     @ManyToMany
     @JoinTable(name="franchise_owner",
     joinColumns = @JoinColumn(name="franchise_id"),
-    inverseJoinColumns = @JoinColumn(name="owner_id"))
-    @Column(name="owners",nullable = false)
-    private List<Owner> owners = new ArrayList<>();
+    inverseJoinColumns = @JoinColumn(name="emp_owner_id"))
+    @Column(name="emp_owner",nullable = false)
+    private List<Employee> owners = new ArrayList<>();
 
     @Column(name="tan_number")
     private String tanNumder;

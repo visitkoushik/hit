@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name="item")
 @Table(name="items")
 public class Item extends BaseEntity
 {
@@ -34,7 +34,7 @@ public class Item extends BaseEntity
     @Column(name="description")
     private String description;
     @Column(name="status",nullable = false)
-    private Boolean isAvailable;
+    private Boolean available;
 
     @Column(name="category",nullable = false)
     @ManyToMany(fetch = FetchType.EAGER)
@@ -44,6 +44,8 @@ public class Item extends BaseEntity
     private List<Category> categories= new ArrayList<>();
 
  
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "itemEntity")
+    // @OneToOne(mappedBy = "itemEntity")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "price_id")
      private ItemPricing itemPricingEntity;
 }

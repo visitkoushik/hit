@@ -33,8 +33,5 @@ public class ItemPricing extends BaseEntity{
     @Column(name="update_date")
     private Date updateDate;
 
-    
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "price_id")
-    private Item itemEntity;
+     
 }

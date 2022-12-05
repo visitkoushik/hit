@@ -1,5 +1,6 @@
 package com.teahouse.inventory.teahouseinventory.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -12,9 +13,13 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "category")
 @Table(name = "category")
 public class Category extends BaseEntity{
     
+
     private String categoryName;
+
+    @Column(name="status",nullable = false)
+    private boolean available;
 }

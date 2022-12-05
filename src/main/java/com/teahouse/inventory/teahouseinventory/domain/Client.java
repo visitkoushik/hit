@@ -3,10 +3,13 @@ package com.teahouse.inventory.teahouseinventory.domain;
 
 
  
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.Roles;
 
@@ -25,5 +28,9 @@ public class Client extends PersonEntity {
     @Column(name="client_role",nullable = false)
     @Enumerated(value=EnumType.STRING)
     private Roles roles = Roles.CLIENT;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_login_id", referencedColumnName = "id")
+    private UserLogin userLogin;
 
 }

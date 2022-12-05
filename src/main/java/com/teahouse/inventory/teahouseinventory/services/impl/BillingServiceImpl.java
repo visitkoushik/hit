@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.teahouse.inventory.teahouseinventory.domain.Billing;
+import com.teahouse.inventory.teahouseinventory.exceptions.ResourceNotFoundException;
 import com.teahouse.inventory.teahouseinventory.repositories.BillingRepository;
 import com.teahouse.inventory.teahouseinventory.services.BillingService;
 
@@ -33,8 +34,10 @@ public class BillingServiceImpl implements BillingService{
 
 
     @Override
-    public Billing findById(String Id) {
-        return this.billingRepository.findById(Id).orElse(null);
+    public Billing findById(Long Id) {
+        return this.billingRepository.findById(Id).orElseThrow(
+            ()-> new ResourceNotFoundException("Billing", "ID", Id));
+
     }
 
 
@@ -48,7 +51,7 @@ public class BillingServiceImpl implements BillingService{
 
 
     @Override
-    public void deleteById(String Id) {
+    public void deleteById(Long Id) {
         // TODO Auto-generated method stub
         
     }
@@ -64,9 +67,25 @@ public class BillingServiceImpl implements BillingService{
 
 
     @Override
-    public List<Billing> findByEmployee(String empID) {
+    public List<Billing> findByEmployee(Long empID) {
    
         return this.billingRepository.findByEmployee(empID);
+    }
+
+
+
+    @Override
+    public Billing update(Billing t, Long id) {
+        Billing bill = this.billingRepository.findById(id).orElseThrow(
+            ()-> new ResourceNotFoundException("Billing", "ID", t.getId()));
+
+            bill.setBillingDate(t.getBillingDate());   
+            bill.setDiscountAmount(t.getDiscountAmount());   
+            bill.setDiscountFormat(t.getDiscountFormat());   
+            bill.setEmployee(t.getEmployee());   
+            bill.setFranchises(t.getFranchises());   
+            bill.setItemEntites(t.getItemEntites());   
+        return this.billingRepository.save(bill);
     }
 
     

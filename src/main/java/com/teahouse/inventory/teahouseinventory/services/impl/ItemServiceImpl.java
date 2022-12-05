@@ -27,7 +27,7 @@ public class ItemServiceImpl implements ItemEntityService{
     }
 
     @Override
-    public Item findById(String Id) {
+    public Item findById(Long Id) {
        
         return this.itemRpository.findById(Id).orElse(null);
     }
@@ -39,9 +39,21 @@ public class ItemServiceImpl implements ItemEntityService{
     }
 
     @Override
-    public void deleteById(String Id) {
+    public void deleteById(Long Id) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public Item update(Item t, Long id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Item> findByStatus(Boolean active) {
+         
+        return this.itemRpository.findByStatus(active);
     }
 
     

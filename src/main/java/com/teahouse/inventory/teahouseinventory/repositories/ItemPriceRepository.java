@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.teahouse.inventory.teahouseinventory.domain.ItemPricing;
 
-public interface ItemPriceRepository extends JpaRepository<ItemPricing,String> {
+public interface ItemPriceRepository extends JpaRepository<ItemPricing,Long> {
     
 }

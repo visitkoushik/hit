@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="address")
-@Entity
+@Entity(name="address")
 public class Address extends BaseEntity {
 
     private String houseNo;

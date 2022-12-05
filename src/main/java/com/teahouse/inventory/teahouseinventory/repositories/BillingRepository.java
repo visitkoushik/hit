@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.teahouse.inventory.teahouseinventory.domain.Billing;
 
 @Repository
-public interface BillingRepository extends JpaRepository<Billing,String>{
+public interface BillingRepository extends JpaRepository<Billing,Long>{
 
 
     @Query("SELECT b FROM billings b WHERE b.billingDate BETWEEN :startDate AND :endDate")
     List<Billing> findByDateRange(@Param("startDate") Date startDate,@Param("endDate") Date endDate);
     @Query("SELECT b FROM billings b WHERE b.employee = :employee_id")
-    List<Billing> findByEmployee(@Param("employee_id") String empID);
+    List<Billing> findByEmployee(@Param("employee_id") Long empID);
 }

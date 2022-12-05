@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.teahouse.inventory.teahouseinventory.domain.Category;
+import com.teahouse.inventory.teahouseinventory.exceptions.ResourceNotFoundException;
 import com.teahouse.inventory.teahouseinventory.repositories.CategoryRepository;
 import com.teahouse.inventory.teahouseinventory.services.CategoryService;
 
@@ -26,9 +27,11 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public Category findById(String Id) {
+    public Category findById(Long Id) {
          
-        return this.categoryRepository.findById(Id).orElse(null);
+        return this.categoryRepository.findById(Id).orElseThrow(
+            ()-> new ResourceNotFoundException("Category", "ID", Id));
+
     }
 
     @Override
@@ -38,9 +41,27 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public void deleteById(String Id) {
+    public void deleteById(Long Id) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public Category update(Category t, Long id) {
+        Category cat = this.categoryRepository.findById(id).orElseThrow(
+            ()-> new ResourceNotFoundException("Category", "ID", t.getId()));
+
+            System.out.println(t.toString());
+        cat.setCategoryName(t.getCategoryName());   
+        cat.setAvailable(t.isAvailable());   
+
+        return this.categoryRepository.save(cat);
+    }
+
+    @Override
+    public List<Category> findByStatus(Boolean active) {
+        
+        return this.categoryRepository.findByStatus(active);
     }
     
 }

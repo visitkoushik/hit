@@ -10,7 +10,7 @@ import com.teahouse.inventory.teahouseinventory.domain.Employee;
 
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee,String>{
+public interface EmployeeRepository extends JpaRepository<Employee,Long>{
     
     @Query("SELECT e FROM employee e WHERE e.isCurrent=false")
     List<Employee> findAllExEmployee();
@@ -22,6 +22,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,String>{
     List<Employee> findAllByName(String lastName,String firstName);
 
     @Query("SELECT e FROM employee e WHERE e.franchises=:ID")
-    List<Employee> findAllEmployeeByFranchiseID(String ID);
+    List<Employee> findAllEmployeeByFranchiseID(Long ID);
 
 }
