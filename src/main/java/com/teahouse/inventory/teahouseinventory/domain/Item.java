@@ -42,8 +42,8 @@ public class Item extends BaseEntity
     private List<Category> categories= new ArrayList<>();
 
  
-    // @OneToOne(mappedBy = "itemEntity")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "price_id")
+ 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_price_id", referencedColumnName = "id")
      private ItemPricing itemPricingEntity;
 }

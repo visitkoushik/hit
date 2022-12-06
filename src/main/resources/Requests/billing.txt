@@ -1,0 +1,21 @@
+{
+    "employeeId":"10",
+    "franchiseId":"9",
+    "billingItem":
+    [
+        {
+            "purchaseAmount":"12",
+            "sellingAmount":"15",
+            "item":"11",
+            "itemCount":"2"
+
+        },
+        {
+            "purchaseAmount":"20",
+            "sellingAmount":"25",
+            "item":"12",
+            "itemCount":"1"
+
+        }      
+    ]
+}

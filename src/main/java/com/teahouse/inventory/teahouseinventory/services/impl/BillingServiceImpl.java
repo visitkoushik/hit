@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.teahouse.inventory.teahouseinventory.domain.Billing;
 import com.teahouse.inventory.teahouseinventory.exceptions.ResourceNotFoundException;
-import com.teahouse.inventory.teahouseinventory.repositories.BillingRepository;
+import com.teahouse.inventory.teahouseinventory.repositories.BillingRepository; 
 import com.teahouse.inventory.teahouseinventory.services.BillingService;
 
 
@@ -15,15 +15,15 @@ import com.teahouse.inventory.teahouseinventory.services.BillingService;
 public class BillingServiceImpl implements BillingService{
 
 
-    private final BillingRepository billingRepository;
-
+    private final BillingRepository billingRepository; 
 
 
     public BillingServiceImpl(BillingRepository billingRepository) {
         this.billingRepository = billingRepository;
+        
     }
 
-
+ 
 
     @Override
     public List<Billing> findAll() {
@@ -82,9 +82,9 @@ public class BillingServiceImpl implements BillingService{
             bill.setBillingDate(t.getBillingDate());   
             bill.setDiscountAmount(t.getDiscountAmount());   
             bill.setDiscountFormat(t.getDiscountFormat());   
-            bill.setEmployee(t.getEmployee());   
-            bill.setFranchises(t.getFranchises());   
-            bill.setItemEntites(t.getItemEntites());   
+            bill.setEmployeeId(t.getEmployeeId());   
+            bill.setFranchiseId(t.getFranchiseId());   
+            bill.setBillingItem(t.getBillingItem());   
         return this.billingRepository.save(bill);
     }
 

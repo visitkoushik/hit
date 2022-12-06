@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.Enumerated; 
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.DiscountFormat;
@@ -33,14 +31,16 @@ public class Billing extends BaseEntity{
     @Column(name="date")
     private Date billingDate;
 
-    
+    // @JoinTable(name="franchise_owner",
+    // joinColumns = @JoinColumn(name="franchise_id"),
+    // inverseJoinColumns = @JoinColumn(name="emp_owner_id"))
 
-    @Column(name="billing_item")
-    @ManyToMany
-    @JoinTable(name="item_billing",
-    joinColumns = @JoinColumn(name="billing_id"),
-    inverseJoinColumns =  @JoinColumn(name = "item_id"))
-    private List<BillingItem> itemEntites = new ArrayList<>();
+
+
+    // @Column(name="billing_item",nullable =  false)
+     //(cascade = CascadeType.ALL)
+    @OneToMany  (cascade = CascadeType.ALL,mappedBy = "billing")
+    private List<BillingItem> billingItem = new ArrayList<>();
 
     @Column(name="discount_mode")
     @Enumerated(value=EnumType.STRING)
@@ -49,9 +49,9 @@ public class Billing extends BaseEntity{
     @Column(name = "discount_amount")
     private BigDecimal discountAmount;
 
-    @ManyToOne
-    private Franchises franchises;
+    @Column(name="franchise_id",nullable = false)
+    private Long franchiseId;
 
-    @ManyToOne
-    private Employee employee;    
+    @Column(name="emp_id", nullable = false)
+    private Long employeeId;    
 }
