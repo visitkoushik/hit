@@ -1,5 +1,6 @@
 package com.teahouse.inventory.teahouseinventory.controlers;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,7 @@ import com.teahouse.inventory.teahouseinventory.domain.requestEntity.BIllingResp
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.BillingItemResp;
 import com.teahouse.inventory.teahouseinventory.services.BillingItemService;
 import com.teahouse.inventory.teahouseinventory.services.BillingService;
+import com.teahouse.inventory.teahouseinventory.util.AppUtil;
 
 @RestController
 @RequestMapping("api/bill/{loginKeyid}")
@@ -62,7 +64,13 @@ public class BillingControl extends BaseControler<Billing>{
 
         List<BIllingResp>  billingResp=new ArrayList<>();
         for(Billing br: b){
-            billingResp.add(new BIllingResp(br));
+            try {
+                billingResp.add(new BIllingResp(br));
+            } catch (ParseException e) {
+                
+                return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            }
+           
         }
 
         return new ResponseEntity<List<BIllingResp>>(billingResp,HttpStatus.OK);
@@ -73,7 +81,12 @@ public class BillingControl extends BaseControler<Billing>{
         
         Billing b = this.billingService.findById(id);
         if(b!=null){
-            return new ResponseEntity<BIllingResp>(new BIllingResp(b),HttpStatus.OK);
+            try {
+                return new ResponseEntity<BIllingResp>(new BIllingResp(b),HttpStatus.OK);
+            } catch (ParseException e) {
+                
+                return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            }
         }
         else{
             return new ResponseEntity<String>("Found No such bill", HttpStatus.OK);
@@ -89,13 +102,17 @@ public class BillingControl extends BaseControler<Billing>{
 
     ) {
         try{
-            Date sDt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(startDate);
-            Date eDt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(endDate);
+            Date sDt = AppUtil.StringToDate(startDate);
+            Date eDt =  AppUtil.StringToDate(endDate);
             
             List<Billing> list= this.billingService.findByDateRange(sDt, eDt);
 
-            return new ResponseEntity<List<Billing>>
-             (list,HttpStatus.OK);
+            List<BIllingResp> bs = new ArrayList<>();
+            for (Billing b:list){
+                bs.add(new BIllingResp(b));
+            }
+            return new ResponseEntity<List<BIllingResp>>
+             (bs,HttpStatus.OK);
         }
         catch(Exception e){
             return new ResponseEntity<String>

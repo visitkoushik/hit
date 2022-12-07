@@ -1,6 +1,7 @@
 package com.teahouse.inventory.teahouseinventory.domain.requestEntity;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 import com.teahouse.inventory.teahouseinventory.domain.Billing;
 import com.teahouse.inventory.teahouseinventory.domain.BillingItem;
 import com.teahouse.inventory.teahouseinventory.domain.enums.DiscountFormat;
+import com.teahouse.inventory.teahouseinventory.util.AppUtil;
 
 import lombok.Data;
 
@@ -17,7 +19,7 @@ public class BIllingResp {
     
  
     private Long id;
-    private Date billingDate; 
+    private String billingDate; 
     private DiscountFormat discountFormat;
     private BigDecimal discountAmount;
     private Long franchiseId;
@@ -28,9 +30,9 @@ public class BIllingResp {
 
 
 
-    public BIllingResp(Billing b){
+    public BIllingResp(Billing b) throws ParseException{
         this.id=b.getId();
-        this.billingDate=b.getBillingDate();
+        this.billingDate=AppUtil.DateToString(b.getBillingDate());
         this.discountFormat=b.getDiscountFormat();
         this.discountAmount = b.getDiscountAmount();
         this.franchiseId=b.getFranchiseId();
