@@ -1,15 +1,21 @@
 package com.teahouse.inventory.teahouseinventory.controlers;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity; 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teahouse.inventory.teahouseinventory.domain.Billing;
 import com.teahouse.inventory.teahouseinventory.domain.BillingItem;
+import com.teahouse.inventory.teahouseinventory.domain.requestEntity.BIllingResp;
+import com.teahouse.inventory.teahouseinventory.domain.requestEntity.BillingItemResp;
 import com.teahouse.inventory.teahouseinventory.services.BillingItemService;
 import com.teahouse.inventory.teahouseinventory.services.BillingService;
 
@@ -39,29 +45,64 @@ public class BillingControl extends BaseControler<Billing>{
             bt.setBilling(b);
             this.billingItemService.save(bt);
        }
-        return new ResponseEntity<String>("Hoeche Bal add ",HttpStatus.CREATED);
+    //    return new ResponseEntity<Billing>(b,HttpStatus.CREATED);
+        return new ResponseEntity<String>("Bill Stored Successfully",HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity onUpdate(Long id, Billing t) {
-        // TODO Auto-generated method stub
-        return new ResponseEntity<String>("Hoeche Bal update ",HttpStatus.ACCEPTED);
+       
+        return new ResponseEntity<String>("Update Service Unavailable",HttpStatus.ACCEPTED);
     }
 
     @Override
     public ResponseEntity onFindAll(Boolean active) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        List<Billing> b = this.billingService.findAll(); 
+
+        List<BIllingResp>  billingResp=new ArrayList<>();
+        for(Billing br: b){
+            billingResp.add(new BIllingResp(br));
+        }
+
+        return new ResponseEntity<List<BIllingResp>>(billingResp,HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity onFindById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        Billing b = this.billingService.findById(id);
+        if(b!=null){
+            return new ResponseEntity<BIllingResp>(new BIllingResp(b),HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("Found No such bill", HttpStatus.OK);
+        }
+     
     }
  
+    //dd/mm/yyyy HH:mm:ss
+    @GetMapping("listbydate")
+    public ResponseEntity findByDate(
+        @RequestParam("start") String startDate,
+        @RequestParam("end") String endDate
 
-    
+    ) {
+        try{
+            Date sDt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(startDate);
+            Date eDt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(endDate);
+            
+            List<Billing> list= this.billingService.findByDateRange(sDt, eDt);
+
+            return new ResponseEntity<List<Billing>>
+             (list,HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<String>
+            ("Date Formate should be 'yyyy-MM-dd'T'HH:mm:ss.SSSZ'",HttpStatus.BAD_REQUEST);
+        }
+      
+    }
 
     
 }

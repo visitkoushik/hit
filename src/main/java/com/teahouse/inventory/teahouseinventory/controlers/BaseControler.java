@@ -78,7 +78,7 @@ public abstract class BaseControler<T> {
         @RequestParam(name="id",required = true) Long id
         ) {
 
-            if(!isValidationFailed(loginKey)){
+            if(isValidationFailed(loginKey)){
                 return   new ResponseEntity<String>
                 ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
             }
