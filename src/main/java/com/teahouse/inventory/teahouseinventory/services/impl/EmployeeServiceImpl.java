@@ -74,7 +74,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee emp = this.employeeRepository.findById(id).orElseThrow(
             ()-> new ResourceNotFoundException("Employeee", "ID", t.getId()));
 
-            emp.setAdresses(emp.getAdresses()); 
+            emp.setAdress(emp.getAdress()); 
             emp.setEmail(t.getEmail());   
             emp.setFirstName(t.getFirstName());   
             emp.setGender(t.getGender());   

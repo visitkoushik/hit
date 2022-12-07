@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated; 
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.DiscountFormat;
@@ -31,14 +32,7 @@ public class Billing extends BaseEntity{
     @Column(name="date")
     private Date billingDate;
 
-    // @JoinTable(name="franchise_owner",
-    // joinColumns = @JoinColumn(name="franchise_id"),
-    // inverseJoinColumns = @JoinColumn(name="emp_owner_id"))
-
-
-
-    // @Column(name="billing_item",nullable =  false)
-     //(cascade = CascadeType.ALL)
+    
     @OneToMany  (cascade = CascadeType.ALL,mappedBy = "billing")
     private List<BillingItem> billingItem = new ArrayList<>();
 
@@ -54,4 +48,7 @@ public class Billing extends BaseEntity{
 
     @Column(name="emp_id", nullable = false)
     private Long employeeId;    
+
+    // @OneToOne
+    // private Client client;
 }

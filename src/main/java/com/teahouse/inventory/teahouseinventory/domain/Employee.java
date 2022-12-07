@@ -37,7 +37,9 @@ public class Employee extends PersonEntity {
     @Column(name="dob" ,nullable = false)
     private Date dateOfBirth;
 
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address adress;
 
     @Column(name="doj",nullable = false)
     private Date dateOfJoin;

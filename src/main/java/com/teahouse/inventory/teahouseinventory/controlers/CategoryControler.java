@@ -75,8 +75,15 @@ public class CategoryControler  extends BaseControler<Category>{
 
     @Override
     public ResponseEntity onUpdate(Long id, Category t) {
-        return new ResponseEntity<Category>(this.categoryService.update(t,id), 
-        HttpStatus.ACCEPTED);
+        if(this.categoryService.findById(id)!=null){
+            return new ResponseEntity<Category>(this.categoryService.update(t,id), 
+            HttpStatus.ACCEPTED);
+        }
+ 
+            return new ResponseEntity<String>(
+                "Record not found", 
+            HttpStatus.NOT_FOUND);
+        
     }
 
 

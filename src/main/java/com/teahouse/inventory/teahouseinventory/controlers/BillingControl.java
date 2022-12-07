@@ -1,7 +1,6 @@
 package com.teahouse.inventory.teahouseinventory.controlers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.ParseException; 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.teahouse.inventory.teahouseinventory.domain.Billing;
 import com.teahouse.inventory.teahouseinventory.domain.BillingItem;
-import com.teahouse.inventory.teahouseinventory.domain.requestEntity.BIllingResp;
-import com.teahouse.inventory.teahouseinventory.domain.requestEntity.BillingItemResp;
+import com.teahouse.inventory.teahouseinventory.domain.requestEntity.BIllingResp; 
 import com.teahouse.inventory.teahouseinventory.services.BillingItemService;
 import com.teahouse.inventory.teahouseinventory.services.BillingService;
 import com.teahouse.inventory.teahouseinventory.util.AppUtil;
@@ -48,7 +46,11 @@ public class BillingControl extends BaseControler<Billing>{
             this.billingItemService.save(bt);
        }
     //    return new ResponseEntity<Billing>(b,HttpStatus.CREATED);
-        return new ResponseEntity<String>("Bill Stored Successfully",HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<BIllingResp>(new BIllingResp(b),HttpStatus.CREATED);
+        } catch (ParseException e) {
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_MODIFIED);
+        }
     }
 
     @Override
