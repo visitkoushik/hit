@@ -14,18 +14,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teahouse.inventory.teahouseinventory.domain.LoggedInUser;
+import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
 import com.teahouse.inventory.teahouseinventory.services.LoggedInUserService;
+import com.teahouse.inventory.teahouseinventory.services.UserLoginService;
 
 
 @MappedSuperclass
 public abstract class BaseControler<T> {
 
     @Autowired
-    private   LoggedInUserService loggedInUserService;
+    private LoggedInUserService loggedInUserService; 
+    
 
+    public String loginKey="";
 
     public abstract ResponseEntity onAdd(T t);   
-
     @PostMapping("add") 
     public ResponseEntity add(
     @PathVariable("loginKeyid")  String loginKey,  
@@ -34,10 +37,11 @@ public abstract class BaseControler<T> {
             return   new ResponseEntity<String>
                     ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
         }
+        this.loginKey=loginKey;
         return this.onAdd(t);
     }
     
-
+    
 
     public abstract ResponseEntity onUpdate(Long id,T t);    
     @PutMapping("edit/{id}")
@@ -49,6 +53,7 @@ public abstract class BaseControler<T> {
                 return   new ResponseEntity<String>
                         ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
             }
+            this.loginKey=loginKey;
             return this.onUpdate(id,t);
         }
 
@@ -66,6 +71,7 @@ public abstract class BaseControler<T> {
                 return   new ResponseEntity<String>
                         ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
             }
+            this.loginKey=loginKey;
             return this.onFindAll(active);
         }
    
@@ -83,6 +89,7 @@ public abstract class BaseControler<T> {
                 ("Either wrong credential or not have permission", HttpStatus.UNAUTHORIZED);
             }
 
+            this.loginKey=loginKey;
         return   this.onFindById(id);
     }
 
@@ -90,7 +97,11 @@ public abstract class BaseControler<T> {
     protected boolean isValidationFailed(String loginKey){
          if(loginKey.equals("1")) return false;
          LoggedInUser logged=  this.loggedInUserService.findByAuthKey(loginKey);
-         return  logged==null || logged.isLoggedin();
+         return  logged==null || !logged.isLoggedin();
     }
-    
+
+    public UserLogin getUserLogin(String loginKey){
+        LoggedInUser logged=  this.loggedInUserService.findByAuthKey(loginKey);
+        return logged==null?null:logged.getUserlogin();
+    }
 }

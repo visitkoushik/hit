@@ -48,7 +48,7 @@ public class ClientServiceImpl implements ClientService {
         Client client = this.clientRepository.findById(id).orElseThrow(
             ()-> new ResourceNotFoundException("Client", "ID", t.getId()));
 
-            client.setAdresses(t.getAdresses());   
+            client.setAddresses(t.getAddresses());   
             client.setDateOfBirth(t.getDateOfBirth());   
             client.setEmail(t.getEmail());   
             client.setFirstName(t.getFirstName());   

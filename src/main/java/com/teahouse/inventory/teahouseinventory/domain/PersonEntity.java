@@ -34,11 +34,11 @@ public class PersonEntity extends BaseEntity{
     @Column(name="gender",nullable = false)
     private Gender gender;
 
-    @Column(name = "mobile")
-    private Long[] mobileNumbers;
+    @Column(name = "mobile",unique=true)
+    private String mobileNumbers;
 
 
-    @Column(name="email")
+    @Column(name="email",unique=true)
     private String email;
     
 

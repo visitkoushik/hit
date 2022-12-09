@@ -22,6 +22,7 @@ public class ClientControler extends BaseControler<Client>{
 
     @Override
     public ResponseEntity onAdd(Client t) {
+        
         return new ResponseEntity<Client>(this.clientService.save(t),
         HttpStatus.CREATED);
     }

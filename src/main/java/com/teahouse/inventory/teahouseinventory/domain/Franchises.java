@@ -20,13 +20,13 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="entity")
-@Entity
+@Table(name="franchises")
+@Entity(name = "franchises")
 public class Franchises extends BaseEntity{
     
     private String name;
     @Column(name="address",nullable = false)
-    private Address address;
+    private FranchiseAddress address;
 
     @ManyToMany
     @JoinTable(name="franchise_owner",

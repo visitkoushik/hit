@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.teahouse.inventory.teahouseinventory.domain.Item;
+import com.teahouse.inventory.teahouseinventory.exceptions.ResourceNotFoundException;
 import com.teahouse.inventory.teahouseinventory.repositories.ItemRepository;
 import com.teahouse.inventory.teahouseinventory.services.ItemEntityService;
 
@@ -29,7 +30,10 @@ public class ItemServiceImpl implements ItemEntityService{
     @Override
     public Item findById(Long Id) {
        
-        return this.itemRpository.findById(Id).orElse(null);
+        return this.itemRpository.findById(Id).orElseThrow(
+
+            ()-> new ResourceNotFoundException("Item", "ID", Id)
+        );
     }
 
     @Override
@@ -46,8 +50,16 @@ public class ItemServiceImpl implements ItemEntityService{
 
     @Override
     public Item update(Item t, Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        Item f = this.findById(id);
+        if(f!=null){
+           f.setAvailable(t.getAvailable());
+           f.setCategories(t.getCategories());
+           f.setDescription(t.getDescription());
+           f.setItemName(t.getItemName());
+           f.setItemPricingEntity(t.getItemPricingEntity());
+        }
+        
+        return this.itemRpository.save(f);
     }
 
     @Override

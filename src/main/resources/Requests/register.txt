@@ -1,0 +1,6 @@
+{
+    "userName":"kmajumder",
+    "passWord":"1234567890",
+    "userType":"OWNER"
+
+}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.teahouse.inventory.teahouseinventory.domain.LoggedInUser;
 import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
 import com.teahouse.inventory.teahouseinventory.domain.enums.UserType;
+import com.teahouse.inventory.teahouseinventory.domain.requestEntity.GeneralResp;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LogOut;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LoginBody;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LoginResp;
@@ -32,15 +33,25 @@ public class LoginUserControler {
 
 
     @PostMapping("logout")
-    public ResponseEntity<String>  logout(@RequestBody LogOut login){
-          LoggedInUser loggedId =  this.loggedInUserService.findByAuthKey(login.getAuthCode());
+    public ResponseEntity<GeneralResp>  logout(@RequestBody LogOut logout){
+          LoggedInUser loggedId =  this.loggedInUserService.findByAuthKey(logout.getAuthCode());
           if(loggedId!=null){
             loggedId.setLoggedin(false);
+            loggedId.setAuthKey(null);
             this.loggedInUserService.update(loggedId, loggedId.getId());
-            return new ResponseEntity<String>("Logged out successfully",   HttpStatus.OK);
+            
+            new ResponseEntity<GeneralResp>(new GeneralResp(
+            "Logged out successfully",
+            HttpStatus.OK.value(),
+            null
+          ),   HttpStatus.OK);
           }
           
-          return new ResponseEntity<String>("Something went wrong. ",   HttpStatus.OK);
+          return new ResponseEntity<GeneralResp>(new GeneralResp(
+            "Something went wrong. ",
+            HttpStatus.OK.value(),
+            null
+          ),   HttpStatus.OK);
     }
 
     @PostMapping("login")
@@ -83,7 +94,6 @@ public class LoginUserControler {
             LoggedInUser l = 
              this.loggedInUserService.save(new LoggedInUser());
             userLogin.setLoggedinuser(l);
-            userLogin.setUserType(UserType.CLIENT);
             userLogin.setIsActive(true);
 
             UserLogin u = this.userLoginService.save(userLogin);

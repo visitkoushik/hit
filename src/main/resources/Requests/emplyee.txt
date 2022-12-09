@@ -1,0 +1,17 @@
+{
+    "firstName":"Koushik",
+    "lastName":"Majumder",
+    "gender":"MALE",
+    "mobileNumbers":["9836757782"],
+    "email":"visit.koushik@gmai@gmail.com",
+    "dateOfBirth":"1980-09-16T21:00:00",
+    "dateOfJoin":"2022-09-16T21:00:00",
+    "roles":"SUPERADMIN",
+    "percentageOfShare":"100",
+    "address":{
+       "houseNo":"179",
+       "street":"M.M Bose Road",
+       "postalCode":"700146"
+   }
+
+}

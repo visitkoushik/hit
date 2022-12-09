@@ -3,8 +3,20 @@ package com.teahouse.inventory.teahouseinventory.domain.requestEntity;
 import com.teahouse.inventory.teahouseinventory.domain.Address;
 import com.teahouse.inventory.teahouseinventory.domain.ClientAddress;
 
-public class ClientAddressResp extends Address{
+import lombok.Data;
+
+@Data
+public class ClientAddressResp {
     
+    private String houseNo;
+    private String street;
+    private String locality;
+    private String area;
+    private String city;
+    private String dist;
+    private String state;
+    private String postalCode;
+
     public ClientAddressResp(ClientAddress clientAddress){
         this.setArea(clientAddress.getArea());
         this.setCity(clientAddress.getCity());

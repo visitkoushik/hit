@@ -1,0 +1,19 @@
+{
+    "tanNumder":"TAMB1234M",
+    "address":{
+        "houseNo":"179",
+        "street":"M.M Bose Road",
+        "postalCode":"700146"
+    },
+    "owners":[
+        {
+            "firstName":"Koushik",
+            "gender":"Male",
+            "dateOfBirth":"16/09/1980",
+            "dateOfJoin":"16/08/2022",
+            "roles":"ADMIN",
+            
+        }
+    ]
+
+}

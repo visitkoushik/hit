@@ -16,15 +16,25 @@ import javax.persistence.UniqueConstraint;
 
 import com.teahouse.inventory.teahouseinventory.domain.enums.UserType;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 @Entity(name="userLogin")
 @Table(name="user_login" ,  uniqueConstraints={@UniqueConstraint(columnNames ={"user_name"})})
 public class UserLogin extends BaseEntity{
     
+    public UserLogin(String userName, String passWord, UserType userType){
+
+        this.userName = userName;
+        this.passWord = passWord;
+        this.userType = userType;
+
+    }
     @Column(name="user_name",nullable = false)
     private String userName;
      

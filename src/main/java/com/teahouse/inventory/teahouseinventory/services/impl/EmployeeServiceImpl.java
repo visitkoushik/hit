@@ -74,7 +74,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee emp = this.employeeRepository.findById(id).orElseThrow(
             ()-> new ResourceNotFoundException("Employeee", "ID", t.getId()));
 
-            emp.setAdress(emp.getAdress()); 
+            // emp.setAddress(emp.getAddress()); 
             emp.setEmail(t.getEmail());   
             emp.setFirstName(t.getFirstName());   
             emp.setGender(t.getGender());   
@@ -90,6 +90,19 @@ public class EmployeeServiceImpl implements EmployeeService {
             emp.setDateOfBirth(t.getDateOfBirth());
             emp.setPANNumber(t.getPANNumber());
         return this.employeeRepository.save(emp);
+    }
+
+
+    @Override
+    public Employee findByUserLogin(Long userLoginID) {
+       
+        List<Employee> empList = this.employeeRepository.findByUserLogin(userLoginID);
+
+        if(empList==null || empList.size()==0){
+            return  null;
+        }
+
+        return empList.get(0);
     }
     
 }

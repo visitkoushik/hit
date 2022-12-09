@@ -37,7 +37,7 @@ public class Client extends PersonEntity {
     private Roles roles = Roles.CLIENT;
  
     @OneToMany  (cascade = CascadeType.ALL,mappedBy = "client")
-    private List<Address> adresses = new ArrayList<>();
+    private List<ClientAddress> addresses = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_login_id", referencedColumnName = "id")

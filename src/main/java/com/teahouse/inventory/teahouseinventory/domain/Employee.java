@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="employee")
@@ -30,21 +30,21 @@ public class Employee extends PersonEntity {
     @Column(name="status",nullable = false)
     private Boolean isCurrent;
 
-    @Column(name="pan_number" )
+    @Column(name="pan_number",unique=true )
     private String PANNumber;
 
 
     @Column(name="dob" ,nullable = false)
     private Date dateOfBirth;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address adress;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private EmployeeAddress address;
+  
     @Column(name="doj",nullable = false)
     private Date dateOfJoin;
 
-    @Column(name="doe", nullable = false)
+    @Column(name="doe")
     private Date dateOfExit;
 
 

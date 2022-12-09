@@ -1,0 +1,26 @@
+{
+    "userName":"Debarun",
+    "passWord":"1234567890",
+    "userType":"EMPLOYEE",
+
+
+
+
+    
+    "firstName":"Debarun",
+    "lastName":"Roy",
+    "middleName":"Bause",
+    "gender":"MALE",
+    "mobileNumbers":"8836757782",
+    "email":"dbroy@gmai@gmail.com",
+    "dateOfBirth":"1993-10-30T21:00:00",
+    "dateOfJoin":"2022-09-17T21:00:00",
+    "roles":"ADMIN",
+    "percentageOfShare":"100",
+    "address":{
+       "houseNo":"189",
+       "street":"M.M Bose Road",
+       "postalCode":"700146"
+   }
+
+}

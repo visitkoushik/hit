@@ -11,4 +11,5 @@ public interface EmployeeService extends BaseService<Employee,Long>
     List<Employee> findAllEmployee();
     List<Employee> findAllByName(String lastName,String firstName);
     List<Employee> findAllEmployeeByFranchiseID(Long ID);
+    Employee findByUserLogin(Long userLoginID);
 }
