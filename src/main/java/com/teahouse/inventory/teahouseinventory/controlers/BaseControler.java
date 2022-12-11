@@ -18,6 +18,8 @@ import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
 import com.teahouse.inventory.teahouseinventory.services.LoggedInUserService;
 import com.teahouse.inventory.teahouseinventory.services.UserLoginService;
 
+import antlr.collections.List;
+
 
 @MappedSuperclass
 public abstract class BaseControler<T> {

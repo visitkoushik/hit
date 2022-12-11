@@ -86,6 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             emp.setDateOfExit(t.getDateOfExit());
             emp.setDateOfJoin(t.getDateOfJoin()); 
             emp.setFranchises(t.getFranchises());
+            emp.setSalary(t.getSalary());
             emp.setIsCurrent(t.getIsCurrent());
             emp.setDateOfBirth(t.getDateOfBirth());
             emp.setPANNumber(t.getPANNumber());

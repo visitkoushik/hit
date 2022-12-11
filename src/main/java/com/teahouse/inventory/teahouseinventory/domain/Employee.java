@@ -25,43 +25,17 @@ import lombok.NoArgsConstructor;
 @Entity(name="employee")
 @Table(name="employee")
 
-public class Employee extends PersonEntity {
-    
-    @Column(name="status",nullable = false)
-    private Boolean isCurrent;
+public class Employee extends StuffEntity {
+ 
+ 
 
-    @Column(name="pan_number",unique=true )
-    private String PANNumber;
-
-
-    @Column(name="dob" ,nullable = false)
-    private Date dateOfBirth;
-
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private EmployeeAddress address;
-  
-    @Column(name="doj",nullable = false)
-    private Date dateOfJoin;
-
-    @Column(name="doe")
-    private Date dateOfExit;
-
-
-    @Column(name="role",nullable = false)
-    @Enumerated(value=EnumType.STRING)
-    private Roles roles;
-
-    @Column(name="share",nullable = false)
-    private float percentageOfShare;
+    @Column(name="salary",nullable = false)
+    private float salary;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "franchise_id", referencedColumnName = "id")
     private Franchises franchises;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_login_id", referencedColumnName = "id")
-    private UserLogin userLogin;
 
 }

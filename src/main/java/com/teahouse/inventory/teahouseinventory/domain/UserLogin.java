@@ -12,8 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
- 
-
+import com.teahouse.inventory.teahouseinventory.domain.baseentities.BaseEntity;
 import com.teahouse.inventory.teahouseinventory.domain.enums.UserType;
 
 import lombok.AllArgsConstructor;

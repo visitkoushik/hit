@@ -1,24 +1,19 @@
 package com.teahouse.inventory.teahouseinventory.domain;
 
-
-
- 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
+import javax.persistence.Enumerated; 
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.teahouse.inventory.teahouseinventory.domain.baseentities.PersonEntity;
 import com.teahouse.inventory.teahouseinventory.domain.enums.Roles;
 
 import lombok.AllArgsConstructor;
@@ -27,16 +22,22 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Client extends PersonEntity {
-     
- 
-    @OneToMany  (cascade = CascadeType.ALL,mappedBy = "client")
-    private List<ClientAddress> addresses = new ArrayList<>();
+@Entity(name="owners")
+@Table(name="owners")
 
-    
+public class Owners extends StuffEntity {
+      
+    @Column(name="share",nullable = false)
+    private float percentageOfShare;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "franchise_id", referencedColumnName = "id")
+    private List<Franchises> franchises = new ArrayList<>();
+
+
+
 
 }

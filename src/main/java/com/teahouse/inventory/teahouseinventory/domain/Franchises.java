@@ -9,7 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
- 
+
+import com.teahouse.inventory.teahouseinventory.domain.baseentities.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,11 +36,11 @@ public class Franchises extends BaseEntity{
     @Column(name="emp_owner",nullable = false)
     private List<Employee> owners = new ArrayList<>();
 
-    @Column(name="tan_number")
+    @Column(name="tan_number",nullable = false)
     private String tanNumder;
 
 
-    @Column(name="status")
+    @Column(name="status",nullable = false)
     private Boolean isCurrent;
 
 

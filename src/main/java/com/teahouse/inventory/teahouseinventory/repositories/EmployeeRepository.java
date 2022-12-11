@@ -15,7 +15,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>{
     @Query("SELECT e FROM employee e WHERE e.isCurrent=false")
     List<Employee> findAllExEmployee();
 
-    @Query("SELECT e FROM employee e WHERE e.isCurrent=false")
+    @Query("SELECT e FROM employee e WHERE e.isCurrent=true")
     List<Employee> findAllEmployee();
 
     @Query("SELECT e FROM employee e WHERE e.firstName=:firstName AND e.lastName=:lastName")

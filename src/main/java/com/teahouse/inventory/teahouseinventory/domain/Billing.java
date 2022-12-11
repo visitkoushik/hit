@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.teahouse.inventory.teahouseinventory.domain.baseentities.BaseEntity;
 import com.teahouse.inventory.teahouseinventory.domain.enums.DiscountFormat;
 
 import lombok.AllArgsConstructor;

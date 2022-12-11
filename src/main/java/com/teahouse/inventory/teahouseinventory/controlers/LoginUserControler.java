@@ -101,4 +101,14 @@ public class LoginUserControler {
         HttpStatus.CREATED);
     }
 
+
+    @PostMapping("chagepass")
+    public ResponseEntity chagePass(
+        @RequestBody String oldPass,
+        @RequestBody String newPass
+    ){
+        return new ResponseEntity<String>("Not yet Implemented", 
+        HttpStatus.OK);
+    }
+
 }

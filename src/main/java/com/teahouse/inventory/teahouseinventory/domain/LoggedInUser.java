@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
- 
+import com.teahouse.inventory.teahouseinventory.domain.baseentities.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

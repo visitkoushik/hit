@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.teahouse.inventory.teahouseinventory.domain.baseentities.BaseEntity;
 import com.teahouse.inventory.teahouseinventory.domain.enums.DiscountFormat;
 
 import lombok.AllArgsConstructor;

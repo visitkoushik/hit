@@ -40,7 +40,7 @@ public class NewStuff extends Employee {
         e.setPANNumber(getPANNumber());
         e.setIsCurrent(getIsCurrent());
         e.setMobileNumbers(getMobileNumbers());
-        e.setPercentageOfShare(getPercentageOfShare());
+        e.setSalary(getSalary()); 
         e.setPrimaryAddressIndex(getPrimaryAddressIndex());
         e.setRoles(getRoles());
         

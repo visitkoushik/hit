@@ -1,4 +1,4 @@
-package com.teahouse.inventory.teahouseinventory.domain;
+package com.teahouse.inventory.teahouseinventory.domain.baseentities;
 
 import java.io.Serializable;
 
