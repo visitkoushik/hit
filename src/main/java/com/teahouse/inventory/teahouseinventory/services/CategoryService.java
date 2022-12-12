@@ -8,4 +8,5 @@ public interface CategoryService extends BaseService<Category,Long>{
     
     List<Category> findByStatus(Boolean active);
     
+    
 }

@@ -3,26 +3,17 @@ package com.teahouse.inventory.teahouseinventory.controlers;
 import com.teahouse.inventory.teahouseinventory.domain.Employee;
 import com.teahouse.inventory.teahouseinventory.domain.LoggedInUser;
 import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
-import com.teahouse.inventory.teahouseinventory.domain.baseentities.PersonEntity;
 import com.teahouse.inventory.teahouseinventory.domain.enums.Roles;
-import com.teahouse.inventory.teahouseinventory.domain.enums.UserType;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.EmployeeResp;
-import com.teahouse.inventory.teahouseinventory.domain.requestEntity.NewStuff;
 import com.teahouse.inventory.teahouseinventory.exceptions.CreationgException;
-import com.teahouse.inventory.teahouseinventory.services.EmployeeAddressService;
 import com.teahouse.inventory.teahouseinventory.services.EmployeeService;
 import com.teahouse.inventory.teahouseinventory.services.LoggedInUserService;
-import com.teahouse.inventory.teahouseinventory.services.OwnerService;
 import com.teahouse.inventory.teahouseinventory.services.UserLoginService;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,18 +23,15 @@ public class EmployeeControle extends BaseControler<Employee> {
   private final EmployeeService employeeService;
   private final UserLoginService userLoginService;
   private final LoggedInUserService loggedInUserService;
-  private final OwnerService ownerService;
 
   public EmployeeControle(
     EmployeeService employeeService,
     UserLoginService userLoginService,
-    LoggedInUserService loggedInUserService,
-    OwnerService ownerService
+    LoggedInUserService loggedInUserService
   ) {
     this.employeeService = employeeService;
     this.userLoginService = userLoginService;
     this.loggedInUserService = loggedInUserService;
-    this.ownerService = ownerService;
   }
 
   private UserLogin RegisterStuff(UserLogin userLogin) {

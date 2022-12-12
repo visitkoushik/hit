@@ -1,28 +1,15 @@
-package com.teahouse.inventory.teahouseinventory.domain;
+package com.teahouse.inventory.teahouseinventory.domain.baseentities;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
-import com.teahouse.inventory.teahouseinventory.domain.baseentities.PersonEntity;
-import com.teahouse.inventory.teahouseinventory.domain.enums.Gender;
-import com.teahouse.inventory.teahouseinventory.domain.enums.Roles;
+import com.teahouse.inventory.teahouseinventory.domain.EmployeeAddress;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 
 @Data
 @MappedSuperclass

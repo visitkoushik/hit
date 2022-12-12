@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.teahouse.inventory.teahouseinventory.domain.LoggedInUser;
 import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
 import com.teahouse.inventory.teahouseinventory.services.LoggedInUserService;
-import com.teahouse.inventory.teahouseinventory.services.UserLoginService;
 
-import antlr.collections.List;
 
 
 @MappedSuperclass

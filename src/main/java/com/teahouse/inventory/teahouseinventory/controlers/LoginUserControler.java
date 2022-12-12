@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.teahouse.inventory.teahouseinventory.domain.LoggedInUser;
 import com.teahouse.inventory.teahouseinventory.domain.UserLogin;
-import com.teahouse.inventory.teahouseinventory.domain.enums.UserType;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.GeneralResp;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LogOut;
 import com.teahouse.inventory.teahouseinventory.domain.requestEntity.LoginBody;

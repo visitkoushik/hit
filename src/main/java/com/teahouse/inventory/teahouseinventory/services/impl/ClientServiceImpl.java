@@ -28,7 +28,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client findById(Long Id) {
         
-        return this.clientRepository.findById(Id).orElse(null);
+        return this.clientRepository.findById(Id).orElseThrow(
+            ()-> new ResourceNotFoundException("Client", "ID", Id));
     }
 
     @Override
@@ -60,6 +61,14 @@ public class ClientServiceImpl implements ClientService {
             client.setPrimaryAddressIndex(t.getPrimaryAddressIndex());   
             
             return this.clientRepository.save(client);
+    }
+
+    @Override
+    public Client findByContact(String mobileNumber) {
+         
+        return this.clientRepository.findByContact(mobileNumber).orElseThrow(
+            ()-> new ResourceNotFoundException("Client", "Mobile Number", mobileNumber));
+        
     }
     
 }
